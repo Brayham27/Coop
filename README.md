@@ -1,16 +1,27 @@
-# React + Vite
+# COOP by Platzi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**COOP** es una capa de inteligencia artificial que convierte el entretenimiento audiovisual en oportunidades de aprendizaje en tiempo real.
 
-Currently, two official plugins are available:
+Funciona como extensión de navegador sobre plataformas como YouTube, Netflix y Platzi: detecta conceptos en pantalla y los conecta con rutas de conocimiento — específicamente con cursos de Platzi.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ¿Cómo funciona?
 
-## React Compiler
+Cuando pausas un video, COOP analiza la escena, los subtítulos y el contexto para entender qué estás viendo. En segundos despliega una explicación interactiva y te conecta con cursos relacionados, sin sacarte del contenido.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the ESLint configuration
+- React + Vite
+- react-router-dom
+- Detección contextual: Claude API
+- Integración: Platzi API
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Estructura
+
+- `/` — Landing page
+- `/demo` — Demo interactivo del producto
+- `/faq` — Preguntas frecuentes
+
+## Contacto
+
+- Email: brayhamjaimes@gmail.com
+- Twitter/X: [@brayhamjaimes](https://twitter.com/brayhamjaimes)
