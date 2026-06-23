@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import MobileWarning from './components/MobileWarning.jsx'
 import SplashScreen from './components/SplashScreen.jsx'
 import Navbar from './components/Navbar.jsx'
 import HeroCard from './components/HeroCard.jsx'
@@ -33,6 +34,7 @@ function Detail() {
 export default function App() {
   return (
     <BrowserRouter basename="/demo">
+      <MobileWarning />
       <SplashScreen />
       <Routes>
         <Route path="/" element={<Home />} />
