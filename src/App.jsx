@@ -32,7 +32,7 @@ function Detail() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/demo">
       <SplashScreen />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COOP — Preguntas frecuentes</title>
+  <meta name="description" content="Todo lo que quieras saber sobre COOP: tecnología, modelo de negocio, derechos de contenido y visión de futuro.">
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="COOP — Preguntas frecuentes">
+  <meta property="og:description" content="Todo lo que quieras saber sobre COOP: tecnología, modelo de negocio, derechos de contenido y visión de futuro.">
+  <meta property="og:image" content="https://coop-sable-two.vercel.app/preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="COOP — Preguntas frecuentes">
+  <meta name="twitter:description" content="Todo lo que quieras saber sobre COOP: tecnología, modelo de negocio, derechos de contenido y visión de futuro.">
+  <meta name="twitter:image" content="https://coop-sable-two.vercel.app/preview.png">
+  <meta name="twitter:creator"     content="@brayhamjaimes">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B0B0B; --surface: #141414; --surface2: #1C1C1C;
+    --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.13);
+    --green: #0FC370; --green-bg: rgba(15,195,112,0.08); --green-bg2: rgba(15,195,112,0.14);
+    --teal: #3ECFB8;
+    --text: #FFFFFF; --text2: #CCCCCC; --muted: #888888; --dim: #505050;
+    --font: 'Space Grotesk', system-ui, sans-serif;
+    --mono: 'Space Mono', monospace;
+    --r-md: 10px; --r-lg: 16px; --r-xl: 20px; --r-full: 9999px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+  /* ─ Reveal al hacer scroll ─ */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1); }
+  .reveal.visible { opacity: 1; transform: none; }
+  .page-title.reveal { transition-delay: .06s; }
+  .page-sub.reveal { transition-delay: .12s; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; transform: none !important; transition: none; } }
+  /* ─ NAV (consistente con la landing) ─ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.25rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(to bottom, rgba(0,0,0,.85), transparent);
+  }
+  .logo { display: flex; align-items: center; gap: .5rem; text-decoration: none; }
+  .logo-mark {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 2px solid var(--green); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-mark::after { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--green); }
+  .logo-text { font-weight: 700; letter-spacing: .15em; font-size: .85rem; text-transform: uppercase; color: var(--text); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a {
+    color: rgba(255,255,255,.8); text-decoration: none;
+    font-size: .72rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
+    transition: color .15s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--green); }
+  .nav-links a.nav-cta-demo {
+    background: var(--green); color: var(--bg) !important;
+    padding: 8px 16px; border-radius: 9999px;
+    font-size: .68rem; font-weight: 700; white-space: nowrap;
+    transition: background .15s;
+  }
+  .nav-links a.nav-cta-demo:hover { background: #3FD68A; color: var(--bg) !important; }
+  .nav-hamburger {
+    display: none; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    width: 40px; height: 40px; border-radius: 9999px;
+    background: var(--surface2); border: 1px solid var(--border2); cursor: pointer; padding: 0;
+  }
+  .nav-hamburger span { display: block; width: 16px; height: 2px; background: var(--text); border-radius: 2px; transition: all .25s; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  .nav-mobile { display: none; position: fixed; top: 70px; left: 0; right: 0; background: rgba(11,11,11,.97); backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); flex-direction: column; padding: 1rem 2rem 1.5rem; z-index: 99; }
+  .nav-mobile.open { display: flex; }
+  .nav-mobile a { color: rgba(255,255,255,.8); text-decoration: none; font-size: 1rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: .75rem 0; border-bottom: 1px solid var(--border); transition: color .15s; }
+  .nav-mobile a:last-child { border-bottom: none; }
+  .nav-mobile a:hover, .nav-mobile a.active { color: var(--green); }
+  .nav-mobile a.mob-cta-demo {
+    margin-top: .9rem; background: var(--green); color: var(--bg) !important;
+    text-align: center; border-radius: 9999px; padding: .9rem;
+    font-weight: 700; letter-spacing: .12em; border-bottom: none !important;
+  }
+  .nav-mobile a.mob-cta-demo:hover { color: var(--bg) !important; }
+  @media(max-width:700px) { .nav-links { display: none !important; } .logo-text { display: none; } .nav-hamburger { display: flex; } }
+  /* ─ PAGE LAYOUT ─ */
+  .page { max-width: 760px; margin: 0 auto; padding: 7rem 2rem 6rem; }
+  /* ─ PAGE HEADER ─ */
+  .page-eyebrow {
+    font-size: .7rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--green);
+    margin-bottom: .65rem;
+  }
+  .page-title {
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+    letter-spacing: -.03em; line-height: 1.1; margin-bottom: 1rem;
+  }
+  .page-sub {
+    font-size: 1rem; color: var(--muted); line-height: 1.75;
+    max-width: 52ch; margin-bottom: 3.5rem;
+  }
+  /* ─ FAQ ACCORDION ─ */
+  .faq-group { margin-bottom: 3rem; }
+  .faq-group-label {
+    font-size: .68rem; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--dim);
+    margin-bottom: 1rem; padding-bottom: .65rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+  }
+  .faq-q {
+    width: 100%; background: none; border: none;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 1rem; padding: 1.25rem 0;
+    cursor: pointer; text-align: left;
+    font-family: var(--font); font-size: .97rem; font-weight: 600;
+    color: var(--text); transition: color .15s;
+  }
+  .faq-q:hover { color: var(--green); }
+  .faq-icon {
+    width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+    background: var(--surface2); border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .75rem; color: var(--muted);
+    transition: all .2s; font-style: normal;
+  }
+  .faq-item.open .faq-icon {
+    background: var(--green-bg); border-color: rgba(15,195,112,.3);
+    color: var(--green); transform: rotate(45deg);
+  }
+  .faq-a {
+    display: none; padding: 0 0 1.25rem;
+    font-size: .88rem; color: var(--text2); line-height: 1.8;
+  }
+  .faq-item.open .faq-a { display: block; }
+  .faq-a p { margin-bottom: .75rem; }
+  .faq-a p:last-child { margin-bottom: 0; }
+  .faq-a strong { color: var(--text); font-weight: 600; }
+  .faq-a em { color: var(--green); font-style: normal; font-weight: 500; }
+  .faq-a ul { list-style: none; display: flex; flex-direction: column; gap: .4rem; margin: .5rem 0; }
+  .faq-a ul li { display: flex; gap: .65rem; align-items: flex-start; font-size: .85rem; color: var(--muted); }
+  .faq-a ul li::before { content: '→'; color: var(--green); flex-shrink: 0; }
+  /* ─ TAG DE PLAZO (usado en los acordeones de Visión) ─ */
+  .vc-tag {
+    display: inline-block; margin-top: .75rem;
+    font-size: .62rem; font-weight: 700; padding: 2px 9px;
+    border-radius: var(--r-full);
+    background: var(--green-bg2); color: var(--green);
+    border: 1px solid rgba(15,195,112,.22);
+  }
+  /* ─ FOOTER ─ */
+  footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    padding: 1.5rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: .75rem;
+    font-size: .62rem; font-weight: 600; letter-spacing: .12em;
+    text-transform: uppercase; color: #6b7280;
+  }
+  .footer-brand { display: flex; align-items: center; gap: .5rem; }
+  .footer-dot { width: 7px; height: 7px; border-radius: 9999px; background: var(--green); flex-shrink: 0; }
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="coop_by_platzi.html#hero" aria-label="Volver a la landing de COOP">
+    <img src="logo.svg" alt="COOP by Platzi" style="height:20px;width:auto;display:block">
+  </a>
+  <ul class="nav-links">
+    <li><a href="coop_by_platzi.html#hero">Inicio</a></li>
+    <li><a href="coop_by_platzi.html#la-experiencia">¿Qué es?</a></li>
+    <li><a href="coop_by_platzi.html#business-case">¿Por qué?</a></li>
+    <li><a href="coop_by_platzi.html#prototipo">Preview</a></li>
+    <li><a href="coop_by_platzi.html#contacto">Contacto</a></li>
+    <li><a href="/faq" class="active">FAQs</a></li>
+    <li><a href="#" data-demo-link id="demoCompleto" class="nav-cta-demo">Demo completo ↗</a></li>
+  </ul>
+  <button class="nav-hamburger" id="navHam" onclick="toggleMenu()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="coop_by_platzi.html#hero" onclick="closeMenu()">Inicio</a>
+  <a href="coop_by_platzi.html#la-experiencia" onclick="closeMenu()">¿Qué es?</a>
+  <a href="coop_by_platzi.html#business-case" onclick="closeMenu()">¿Por qué?</a>
+  <a href="coop_by_platzi.html#prototipo" onclick="closeMenu()">Preview</a>
+  <a href="coop_by_platzi.html#contacto" onclick="closeMenu()">Contacto</a>
+  <a href="/faq" class="active">FAQs</a>
+  <a href="#" data-demo-link id="demoCompletoMobile" class="mob-cta-demo" onclick="closeMenu()">Demo completo ↗</a>
+</div>
+<main class="page">
+  <div class="page-eyebrow reveal">Preguntas frecuentes</div>
+  <h1 class="page-title reveal">Todo lo que quieras saber sobre COOP</h1>
+  <p class="page-sub reveal">Respuestas directas sobre el proyecto, la tecnología, el modelo de negocio y lo que viene después.</p>
+  <!-- GRUPO: EL PROYECTO -->
+  <div class="faq-group reveal">
+    <div class="faq-group-label">El proyecto</div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        ¿Por qué se llama COOP?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>COOP son las siglas, algo rebuscadas al inglés, de <strong>Cognitive Observation and Output Processor</strong>.</p>
+        <p>Pero hay una razón más personal. El nombre también es un homenaje a mi cachorra, que se llamaba Coop. Este proyecto lleva su nombre.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        ¿En qué fase está el proyecto?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>COOP está en fase de concepto validado con demo funcional. Existe una landing interactiva que demuestra el flujo completo del producto y una propuesta de integración lista para presentar.</p>
+        <p>El siguiente paso es establecer una alianza con Platzi para desarrollar el MVP desde adentro, con acceso al catálogo de cursos, la infraestructura técnica y la base de 7 millones de estudiantes.</p>
+        <p>No hay código de producción todavía. Lo que existe es la visión, el diseño del producto y la arquitectura de la solución.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        ¿Por qué buscar un rol en Platzi en lugar de levantar inversión?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Levantar inversión antes de tener validación con una plataforma real sería construir en el aire.</p>
+        <p>El riesgo principal de COOP no es tecnológico. Es de distribución. Sin una plataforma con millones de usuarios, COOP no tiene dónde demostrar su valor real.</p>
+        <p>Entrar a Platzi me permitiría validar el concepto con la distribución resuelta, iterar rápido con acceso al catálogo y el equipo y construir el caso de negocio desde adentro antes de escalar.</p>
+      </div>
+    </div>
+  </div>
+  <!-- GRUPO: TECNOLOGÍA -->
+  <div class="faq-group reveal">
+    <div class="faq-group-label">Tecnología</div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        ¿Qué tecnología usa COOP?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>COOP combina procesamiento de lenguaje natural con análisis de subtítulos y metadata de video en tiempo real. Usa modelos de lenguaje para identificar conceptos dentro del contexto de la escena y generar explicaciones contextualizadas.</p>
+        <ul>
+          <li>Modelos de lenguaje: Claude API (Anthropic) para comprensión y generación</li>
+          <li>Análisis de subtítulos: procesamiento on-device o servidor ligero por sesión</li>
+          <li>Integración con plataformas: SDK embebible en JavaScript</li>
+          <li>Perfil de usuario: sincronización con Platzi API</li>
+        </ul>
+        <p>La arquitectura está diseñada para correr como capa nativa dentro de la plataforma sin interceptar ni reproducir el contenido audiovisual protegido.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        ¿Qué pasa con la privacidad del usuario?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>COOP está diseñado bajo un principio de privacidad por defecto. El usuario tiene control total:</p>
+        <ul>
+          <li>La activación de COOP es opt-in dentro de la plataforma</li>
+          <li>El análisis puede ocurrir on-device, sin enviar datos a servidores externos</li>
+          <li>El historial de conceptos explorados pertenece al usuario y se puede eliminar</li>
+          <li>La sincronización con el perfil de Platzi solo ocurre si el usuario la activa</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- GRUPO: NEGOCIO -->
+  <div class="faq-group reveal">
+    <div class="faq-group-label">Modelo de negocio</div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        ¿Cómo convencerías a una plataforma de streaming para integrar COOP?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>La propuesta para plataformas no es educativa. Es de negocio. COOP ofrece tres cosas que toda plataforma quiere:</p>
+        <ul>
+          <li><strong>Diferenciación real.</strong> En un mercado donde Netflix, Prime y Disney+ ofrecen prácticamente el mismo catálogo, una capa de conocimiento nativa es un feature que ningún competidor tiene hoy.</li>
+          <li><strong>Más tiempo de sesión.</strong> Cuando el usuario interactúa con COOP, extiende su atención activa. Cada concepto explorado prolonga la sesión y refuerza el hábito de uso.</li>
+          <li><strong>Un canal de monetización nuevo.</strong> Para plataformas con acuerdos educativos, cada enrollment generado por COOP es un ingreso atribuible. Para otras, puede ser un add-on premium.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        ¿Cómo lidias con los derechos del contenido?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>COOP no reproduce, almacena ni redistribuye contenido audiovisual protegido.</p>
+        <p>Lo que hace COOP es analizar los subtítulos (texto plano) para identificar conceptos. A partir de ese concepto genera una explicación propia, sin citar el contenido original. Es equivalente a lo que hace un profesor cuando ve una película con sus alumnos y explica un concepto que aparece en escena.</p>
+        <p><strong>Lo que COOP no hace:</strong></p>
+        <ul>
+          <li>No captura fragmentos de video</li>
+          <li>No almacena historial de contenido visto en servidores de terceros</li>
+          <li>No requiere acceso al DRM ni al stream de video</li>
+        </ul>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        ¿Puede COOP funcionar sin Platzi?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Técnicamente sí. COOP puede conectarse con cualquier catálogo educativo que tenga una API: Coursera, edX, Khan Academy u otros.</p>
+        <p>Sin embargo, Platzi es el socio ideal por tres razones:</p>
+        <ul>
+          <li>Es la plataforma educativa líder en LATAM con el catálogo más relevante para usuarios de streaming</li>
+          <li>La integración es natural: COOP genera enrollments, Platzi aporta el destino del conocimiento</li>
+          <li>El modelo de negocio está perfectamente alineado: ambos crecen cuando la curiosidad se convierte en aprendizaje</li>
+        </ul>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        ¿Y si no quiero distraerme mientras veo mi programa favorito?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>COOP no interrumpe si tú no lo deseas. Al terminar tu programa, te muestra tarjetas de salida con los temas más interesantes que aparecieron, ahí decides qué vale la pena explorar.</p>
+        <p>¿Alguna vez viste una película más de una vez? La segunda vez notas cosas que la primera te pasaron por alto. COOP hace eso mismo, pero en tiempo real: lo que antes era un detalle invisible, ahora tiene contexto.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        ¿No estamos diluyendo la marca académica de Platzi?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Al contrario. COOP funciona estrictamente como un <strong>embudo de adquisición (Top of the Funnel)</strong>. Usa la enorme popularidad comercial del cine y las series solo como gancho para interceptar la atención del usuario.</p>
+        <p>El rigor de cada tarjeta de conocimiento está curado por las Escuelas de Platzi, e invita siempre a transicionar hacia <em>Platzi Expert</em>. La marca académica no se diluye: se alimenta de una audiencia masiva nueva.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        ¿Es posible empaquetar COOP como una solución B2B?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Absolutamente. Esa es la <strong>Fase 2</strong>. La arquitectura de COOP permite licenciarse como una API o un SDK nativo directamente a plataformas OTT emergentes, aerolíneas o smart TVs.</p>
+        <p>El modelo: cobrar un fee de licencia y usar esas plataformas como <em>vitrinas masivas</em> que canalizan tráfico cualificado de vuelta hacia Platzi.</p>
+      </div>
+    </div>
+  </div>
+  <!-- VISIÓN DE FUTURO -->
+  <div class="faq-group reveal">
+    <div class="faq-group-label">Visión de futuro</div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        COOP en gafas inteligentes
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>La versión más ambiciosa de COOP no vive en una pantalla. Con dispositivos como Meta Ray-Ban o Apple Vision Pro, COOP puede convertirse en una capa de conocimiento ambiental que funciona en el campo visual del usuario. El usuario ve una película en el cine o en casa y COOP proyecta una tarjeta discreta en la esquina del campo visual, sin teléfono, sin pausa, sin salir de la experiencia. Este es el estado final de la inteligencia ambiental aplicada al aprendizaje.</p>
+        <span class="vc-tag">Largo plazo</span>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        Platzi como streaming educativo
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Un servicio de streaming de Platzi no sería una plataforma de cursos. Sería un catálogo de contenido audiovisual original: documentales de tecnología, series narrativas donde los personajes son profesionales reales, películas de ciencia e historia con capas de conocimiento integradas.</p>
+        <span class="vc-tag">Mediano plazo</span>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggle(this)">
+        Protocolo de conocimiento personal
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">
+        <p>Todo lo que consumes, desde videos hasta artículos y podcasts, deja una huella. COOP propone que esa huella le pertenezca al usuario y pueda conectarse a cualquier plataforma educativa. No una plataforma más: la capa que une todo.</p>
+        <span class="vc-tag">Largo plazo</span>
+      </div>
+    </div>
+  </div>
+</main>
+<!-- ── HABLEMOS ── -->
+<section id="hablemos" style="padding:6rem 2rem;text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--border)">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(15,195,112,.06) 0%,transparent 70%);pointer-events:none"></div>
+  <div class="reveal" style="max-width:620px;margin:0 auto;position:relative">
+    <div style="font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:1.25rem">Contacto</div>
+    <h2 style="font-size:clamp(1.9rem,3.5vw,2.9rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:1.25rem">
+      Si este proyecto resuena contigo,<br>
+      <span style="color:var(--green)">trabajemos juntos</span> y llevémoslo<br>hasta las últimas consecuencias.
+    </h2>
+    <p style="font-size:1rem;color:var(--muted);line-height:1.8;max-width:52ch;margin:0 auto 2.5rem">
+      Busco un equipo y una plataforma con la que hacer esto realidad. Si estás en Platzi y ves el mismo potencial que yo, hablemos.
+    </p>
+    <div style="display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem">
+      <a href="https://brayhamjaimes.com/" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:9999px;background:var(--surface);border:1px solid var(--border2);color:var(--text2);text-decoration:none;font-size:.82rem;font-weight:500;transition:all .15s" onmouseover="this.style.borderColor='rgba(15,195,112,.4)';this.style.background='rgba(15,195,112,.08)'" onmouseout="this.style.borderColor='rgba(255,255,255,.13)';this.style.background='var(--surface)'">🌐 Portafolio</a>
+      <a href="https://www.linkedin.com/in/brayhamjaimes/" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:9999px;background:var(--surface);border:1px solid var(--border2);color:var(--text2);text-decoration:none;font-size:.82rem;font-weight:500;transition:all .15s" onmouseover="this.style.borderColor='rgba(15,195,112,.4)';this.style.background='rgba(15,195,112,.08)'" onmouseout="this.style.borderColor='rgba(255,255,255,.13)';this.style.background='var(--surface)'">💼 LinkedIn</a>
+      <a href="https://x.com/brayhamjaimes" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:9999px;background:var(--surface);border:1px solid var(--border2);color:var(--text2);text-decoration:none;font-size:.82rem;font-weight:500;transition:all .15s" onmouseover="this.style.borderColor='rgba(15,195,112,.4)';this.style.background='rgba(15,195,112,.08)'" onmouseout="this.style.borderColor='rgba(255,255,255,.13)';this.style.background='var(--surface)'">✕ X</a>
+      <a href="https://www.instagram.com/brayhamjaimes" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:9999px;background:var(--surface);border:1px solid var(--border2);color:var(--text2);text-decoration:none;font-size:.82rem;font-weight:500;transition:all .15s" onmouseover="this.style.borderColor='rgba(15,195,112,.4)';this.style.background='rgba(15,195,112,.08)'" onmouseout="this.style.borderColor='rgba(255,255,255,.13)';this.style.background='var(--surface)'">📸 Instagram</a>
+    </div>
+    <a href="mailto:brayhamjaimes@gmail.com?subject=COOP%20x%20Platzi%20%E2%80%94%20Hablemos&body=Hola%20Brayham%2C%20vi%20tu%20propuesta%20de%20COOP%20y%20me%20gustar%C3%ADa%20conversar." style="display:inline-flex;align-items:center;justify-content:center;background:var(--green);color:#0B0B0B;padding:14px 28px;border-radius:9999px;font-weight:600;font-size:.95rem;text-decoration:none;transition:background .15s" onmouseover="this.style.background='#3FD68A'" onmouseout="this.style.background='var(--green)'">Escribirme un correo</a>
+    <p style="margin-top:1.75rem;font-size:.78rem;color:var(--dim);line-height:1.7">
+      Brayham Jaimes · UX-PM · brayhamjaimes@gmail.com<br>
+      <em style="font-style:italic">"Quiero convertir cada hora de entretenimiento en una puerta al conocimiento, y hacerlo desde adentro, con el mejor equipo posible."</em>
+    </p>
+  </div>
+</section>
+<footer class="reveal">
+  <div class="footer-brand"><span class="footer-dot"></span>COOP BY PLATZI © 2026</div>
+  <div class="footer-by">Una idea de Brayham Jaimes · LATAM ·</div>
+</footer>
+<script>
+  function toggleMenu() {
+    document.getElementById('navHam').classList.toggle('open');
+    document.getElementById('navMobile').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('navHam').classList.remove('open');
+    document.getElementById('navMobile').classList.remove('open');
+  }
+  function toggle(btn) {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    // cierra todos
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    // abre el actual si estaba cerrado
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  // Reveal al hacer scroll
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (e) { e.classList.add('visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+</script>
+<script src="demo-config.js"></script>
+</body>
+</html>
