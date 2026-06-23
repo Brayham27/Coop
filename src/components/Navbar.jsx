@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 // URL de la landing — cambiar por la URL de producción al desplegar
-const LANDING_URL = 'http://localhost:5180/coop_by_platzi.html'
+const LANDING_URL = '/'
 
 export default function Navbar() {
   return (
