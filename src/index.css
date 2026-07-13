@@ -433,6 +433,47 @@ button {
   pointer-events: none;
 }
 
+/* Chips de materias — integrados en los controles, aparecen/ocultan con ellos */
+.player-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+.player-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--platzi-border2);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.player-chip:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+}
+.player-chip.active {
+  background: var(--platzi-green-bg);
+  border-color: rgba(15, 195, 112, 0.4);
+  color: var(--platzi-green);
+}
+.player-chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--platzi-green);
+  flex-shrink: 0;
+}
+
 /* progress bar */
 .progress-track {
   position: relative;
@@ -643,11 +684,29 @@ button {
   font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .note-cta:hover {
   background: var(--platzi-green-lt);
+}
+
+/* Estado "Guardado": pequeño pop + confirmación, sin sacar del reproductor */
+.note-cta.is-saved {
+  background: rgba(15, 195, 112, 0.18);
+  color: var(--platzi-green);
+  cursor: default;
+  animation: note-cta-pop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.note-cta.is-saved:hover {
+  background: rgba(15, 195, 112, 0.18);
+}
+
+@keyframes note-cta-pop {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
 }
 
 /* ---------- Note markers en la barra de progreso ---------- */

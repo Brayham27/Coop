@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COOP | Convierte lo que ves en algo que aprendes</title>
+  <meta name="description" content="La capa de Inteligencia Educativa que transforma lo que ves en aprendizaje, sin salir de la pantalla.">
+  <link rel="canonical" href="https://coop-sable-two.vercel.app/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://coop-sable-two.vercel.app/">
+  <meta property="og:title" content="COOP | Convierte lo que ves en algo que aprendes">
+  <meta property="og:description" content="La capa de Inteligencia Educativa que transforma lo que ves en aprendizaje, sin salir de la pantalla.">
+  <meta property="og:image" content="https://coop-sable-two.vercel.app/preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="COOP — Convierte lo que ves en algo que aprendes">
+  <meta property="og:site_name" content="COOP">
+  <meta property="og:locale" content="es_ES">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="COOP | Convierte lo que ves en algo que aprendes">
+  <meta name="twitter:description" content="La capa de Inteligencia Educativa que transforma lo que ves en aprendizaje, sin salir de la pantalla.">
+  <meta name="twitter:image" content="https://coop-sable-two.vercel.app/preview.png">
+  <meta name="twitter:creator" content="@brayhamjaimes">
+
+
+  <!-- Tipografía Space Grotesk -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS por CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Configuración de Tailwind -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            coop: ['Space Grotesk', 'sans-serif'],
+          },
+          colors: {
+            platzi: {
+              black: '#0B0B0B',
+              surface: '#141414',
+              surface2: '#1C1C1C',
+              green: '#0FC370',
+              greenLight: '#3FD68A',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --green:#0FC370; --bg:#0B0B0B; --surface:#141414;
+      --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+      --text2:#CCCCCC; --muted:#888888; --dim:#505050;
+      --green-bg2:rgba(15,195,112,0.14); --teal:#3ECFB8; --teal-bg:rgba(62,207,184,0.08);
+      --r-lg:16px; --r-xl:20px; --r-full:9999px; --font:'Space Grotesk',system-ui,sans-serif;
+    }
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: #0B0B0B;
+      color: #FFFFFF;
+      overflow-x: clip; /* evita scroll horizontal sin romper position:sticky */
+    }
+    ::selection { background-color: #0FC370; color: #0B0B0B; }
+
+    /* ─── ANIMACIONES ─── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── PLACEHOLDERS DE IMAGEN (reemplazar por assets definitivos) ─── */
+    .img-ph {
+      position: relative;
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      border: 1.5px dashed rgba(255,255,255,0.16);
+      border-radius: var(--r-xl);
+      background:
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0 12px, transparent 12px 24px),
+        radial-gradient(ellipse 120% 120% at 50% 120%, #14100a 0%, #0a0d16 45%, #060810 100%);
+      overflow: hidden; text-align: center;
+    }
+    .img-ph-inner { padding: 1.25rem; max-width: 90%; }
+    .img-ph-icon {
+      width: 38px; height: 38px; margin: 0 auto 0.6rem;
+      color: rgba(255,255,255,0.28);
+    }
+    .img-ph-title {
+      font-size: .82rem; font-weight: 700; letter-spacing: -.01em;
+      color: rgba(255,255,255,0.55); line-height: 1.3;
+    }
+    .img-ph-dim {
+      margin-top: 4px; font-size: .64rem; font-weight: 500;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+    }
+
+    /* ─── HERO: media a pantalla completa + degradado ─── */
+    .hero-media { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+    /* Imagen definitiva del hero (reemplaza el muro de posters): */
+    .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center right; }
+    /* Degradado: oscurece la izquierda (para el texto) y revela la derecha */
+    .hero-grad {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background:
+        linear-gradient(to right, #0B0B0B 0%, rgba(11,11,11,.96) 28%, rgba(11,11,11,.6) 52%, rgba(11,11,11,.18) 78%, transparent 100%),
+        linear-gradient(to bottom, rgba(11,11,11,.7) 0%, transparent 20%, transparent 66%, #0B0B0B 100%);
+    }
+    /* Muro de posters — placeholder a pantalla completa mientras subes la imagen del hero */
+    .poster-wall { position: absolute; inset: 0; }
+    .poster-grid {
+      position: absolute; top: 50%; left: 60%;
+      width: 82%;
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+      transform: translate(-50%, -50%) rotate(8deg) scale(1.1);
+    }
+    .poster-cell {
+      aspect-ratio: 2/3;
+      border: 1px dashed rgba(255,255,255,0.12);
+      border-radius: 12px;
+      background: linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+    }
+    .poster-cell:nth-child(3n)   { background: linear-gradient(160deg, rgba(15,195,112,0.10), rgba(255,255,255,0.01)); }
+    .poster-cell:nth-child(4n+1) { background: linear-gradient(160deg, rgba(62,207,184,0.08), rgba(255,255,255,0.01)); }
+
+    /* ─── CARRUSEL DE MINIATURAS (loop infinito de derecha a izquierda) ─── */
+    .thumb-marquee {
+      --thumb-w: 240px;   /* ancho de cada miniatura (50% más grande) */
+      --thumb-gap: 21px;  /* separación entre miniaturas */
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+              mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    }
+    .thumb-track {
+      display: flex;
+      width: max-content;
+      animation: thumb-scroll 60s linear infinite;
+    }
+    .thumb-track:hover { animation-play-state: paused; }
+    /* Desplaza exactamente un juego de 12 celdas (ancho + separación) → loop sin saltos */
+    @keyframes thumb-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(calc(-12 * (var(--thumb-w) + var(--thumb-gap)))); }
+    }
+    .thumb-cell {
+      flex: 0 0 auto; width: var(--thumb-w); aspect-ratio: 16/10;
+      margin-right: var(--thumb-gap);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      object-fit: cover;
+      background: #141414;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .thumb-track { animation: none; }
+    }
+
+    /* ─── GALERÍA DE ESCENAS — apilado fijo (sticky stacking) ─── */
+    .stack { position: relative; }
+    .scene {
+      position: sticky; top: 0;
+      height: 100vh; height: 100svh;
+      overflow: hidden;
+      background: #04060d; /* fondo opaco: cada escena cubre a la anterior */
+    }
+    /* Espaciador: da "dwell" (la escena se ve sola) antes de que la siguiente la cubra */
+    .scene-spacer { height: 30vh; height: 30svh; }
+    .scene-inner {
+      position: absolute; inset: 0;
+      transform-origin: center center;
+      will-change: transform, filter;
+    }
+    .scene-media {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: #04060d;
+    }
+    /* Imagen definitiva de la escena (reemplaza el bloque .img-ph-inner): */
+    .scene-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    /* Degradado para legibilidad de la tarjeta */
+    .scene-grad {
+      position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      background:
+        linear-gradient(to left, rgba(4,6,13,.78) 0%, rgba(4,6,13,.25) 45%, transparent 78%),
+        linear-gradient(to top, rgba(4,6,13,.7) 0%, transparent 32%);
+    }
+    .scene-content {
+      position: absolute; inset: 0; z-index: 2;
+      max-width: 1200px; margin: 0 auto; padding: 0 3rem;
+      display: flex; align-items: center; justify-content: flex-end;
+    }
+    .scene-card {
+      position: relative;
+      width: min(320px, 90%);
+      /* Mismo estilo que la tarjeta del demo (.coop-overlay-demo) */
+      background: rgba(20,20,20,.72);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--r-lg); padding: 16px;
+      backdrop-filter: blur(20px) saturate(140%); -webkit-backdrop-filter: blur(20px) saturate(140%);
+      box-shadow: 0 8px 32px rgba(0,0,0,.6), inset 0 0 0 1px rgba(15,195,112,.3);
+      opacity: 0; transform: translateY(38px) scale(.96);
+      transition: opacity .6s cubic-bezier(.22,1,.36,1) .12s, transform .7s cubic-bezier(.34,1.56,.64,1) .12s;
+    }
+    .scene.in-view .scene-card { opacity: 1; transform: translateY(0) scale(1); }
+    .scene-card .ov-close {
+      position: absolute; top: 16px; right: 16px;
+      color: var(--muted); font-size: .85rem; line-height: 1; cursor: default;
+    }
+    /* Etiqueta placeholder de la escena */
+    .scene-tag {
+      position: absolute; z-index: 3; left: 3rem; bottom: 2rem;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 12px; border-radius: 9999px;
+      background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.1);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5);
+    }
+    .ov-q { font-size: .65rem; color: var(--green); text-transform: uppercase; letter-spacing: .1em; font-weight: 600; margin-bottom: 8px; padding-right: 18px; }
+    .ov-concept { font-size: 1.125rem; font-weight: 600; letter-spacing: -.01em; margin-bottom: 8px; line-height: 1.2; color: #fff; }
+    .ov-text { font-size: .75rem; color: var(--text2); line-height: 1.65; margin-bottom: 12px; }
+    .ov-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+    .ov-tag, .ov-tag-t { font-size: .7rem; padding: 3px 10px; border-radius: var(--r-full); background: var(--teal-bg); color: var(--teal); border: 1px solid rgba(62,207,184,.25); }
+    .ov-btn { width: 100%; background: var(--green); color: var(--bg); border: none; border-radius: 10px; padding: 8px 16px; font-size: .75rem; font-weight: 600; cursor: pointer; font-family: var(--font); transition: background .15s, transform .2s cubic-bezier(.34,1.56,.64,1); }
+    .ov-btn:hover { background: #3FD68A; }
+
+    @media (max-width: 760px) {
+      .scene-content {
+        align-items: flex-end; justify-content: center;
+        padding: 0 1.25rem 5.5rem;
+      }
+      .scene-card { width: 100%; }
+      .scene-tag { left: 1.25rem; bottom: 1.25rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up, .scene-card { transition: none; }
+      .scene-inner { transform: none !important; filter: none !important; }
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <nav class="fixed top-0 left-0 right-0 z-50 px-5 sm:px-8 md:px-12 pt-5 md:pt-6 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent">
+    <a href="#hero" class="flex items-center fade-up" style="transition-delay: 0s;" aria-label="COOP — Inicio">
+      <img src="logo.svg" alt="COOP" class="h-5 w-auto">
+    </a>
+
+    <div class="hidden md:flex flex-row gap-7 items-center">
+      <a href="#hero" class="text-xs font-semibold tracking-widest uppercase text-white/80 hover:text-platzi-green transition-colors fade-up" style="transition-delay: 0.1s;">Inicio</a>
+      <a href="faq.html" class="text-xs font-semibold tracking-widest uppercase text-white/80 hover:text-platzi-green transition-colors fade-up" style="transition-delay: 0.15s;">FAQs</a>
+      <a href="#" data-demo-link id="demoCompleto" class="text-xs font-bold tracking-widest uppercase text-black bg-platzi-green hover:bg-platzi-greenLight px-4 py-2 rounded-full transition-colors fade-up whitespace-nowrap" style="transition-delay: 0.2s;">Demo completo ↗</a>
+    </div>
+
+    <button id="mobileMenuBtn" class="md:hidden w-10 h-10 rounded-full bg-platzi-surface2 flex flex-col items-center justify-center gap-[4px] border border-white/10 fade-up" style="transition-delay: 0.4s;">
+      <span class="w-4 h-0.5 bg-white rounded-full"></span>
+      <span class="w-4 h-0.5 bg-white rounded-full"></span>
+      <span class="w-4 h-0.5 bg-white rounded-full"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobileMenu" class="fixed inset-0 z-50 bg-platzi-black hidden flex-col p-5 sm:p-8 uppercase tracking-widest">
+    <div class="flex justify-between items-center">
+      <img src="logo.svg" alt="COOP" class="h-5 w-auto">
+      <button id="closeMenuBtn" class="w-10 h-10 rounded-full bg-platzi-surface2 flex items-center justify-center border border-white/10 text-white text-xl">✕</button>
+    </div>
+    <div class="flex flex-col gap-8 mt-16">
+      <a href="#hero" class="mobile-link text-xl sm:text-2xl font-semibold tracking-widest hover:text-platzi-green transition-colors">Inicio</a>
+      <a href="faq.html" class="mobile-link text-xl sm:text-2xl font-semibold tracking-widest hover:text-platzi-green transition-colors">FAQs</a>
+    </div>
+    <a href="#" data-demo-link id="demoCompletoMobile" class="mobile-link mt-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-platzi-green text-black text-base font-bold tracking-widest uppercase">
+      Demo completo ↗
+    </a>
+  </div>
+
+  <!-- ══════════ HERO ══════════ -->
+  <section id="hero" class="relative min-h-[100svh] flex items-center overflow-hidden">
+    <!-- MEDIA DE FONDO A PANTALLA COMPLETA -->
+    <div class="hero-media" aria-hidden="true">
+      <img class="hero-img" src="assetslanding/Hero.png" alt="">
+    </div>
+
+    <!-- Degradado: revela la derecha de la imagen, oscurece la izquierda para el texto -->
+    <div class="hero-grad"></div>
+
+    <!-- Glow ambiental -->
+    <div class="absolute top-1/3 left-0 w-[600px] md:w-[800px] h-[500px] md:h-[600px] bg-platzi-green/10 rounded-full blur-[160px] pointer-events-none z-[2]"></div>
+
+    <!-- Texto (izquierda) -->
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 md:px-12 pt-28 pb-16">
+      <div class="max-w-xl">
+        <h1 class="text-[clamp(2.75rem,7vw,5.5rem)] font-bold leading-[0.95] tracking-tighter fade-up" style="transition-delay: 0.1s;">
+          Convierte lo que consumes<br>
+          <span class="text-platzi-green">en&nbsp;lo que aprendes</span>
+        </h1>
+        <p class="mt-6 max-w-md text-sm md:text-base text-gray-300 leading-relaxed font-medium fade-up" style="transition-delay: 0.2s;">
+          La capa de Inteligencia Educativa construida para que aprendas de lo que más amas, sin salir de la pantalla.
+        </p>
+        <div class="mt-9 flex flex-wrap items-center gap-4 fade-up" style="transition-delay: 0.3s;">
+          <a href="#" data-demo-link id="probarDemoHero"
+             class="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-platzi-green hover:bg-platzi-greenLight text-black text-sm sm:text-base font-bold uppercase tracking-wide transition-all hover:scale-[1.03] shadow-[0_8px_32px_rgba(15,195,112,0.25)]">
+            Prueba el demo
+            <span class="transition-transform group-hover:translate-x-1">↗</span>
+          </a>
+          <a href="#la-experiencia" class="text-xs sm:text-sm font-semibold tracking-widest uppercase text-white/70 hover:text-platzi-green transition-colors">
+            ¿Cómo funciona?
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ GALERÍA DE ESCENAS (apilado fijo) ══════════ -->
+  <section id="experiencia" class="relative bg-[#0B0B0B]">
+    <!-- Encabezado + carrusel -->
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 pt-20 sm:pt-28 pb-10 sm:pb-14">
+      <div class="max-w-2xl mb-10 sm:mb-12 fade-up">
+        <h2 class="text-3xl md:text-5xl font-bold tracking-tighter leading-tight mb-4">
+          Cada escena esconde<br>algo que aprender
+        </h2>
+        <p class="text-gray-400 text-sm md:text-base leading-relaxed font-medium">
+          Pausa cualquier contenido y COOP detecta el concepto detrás de la escena, ya sea de física, finanzas o filosofía, y lo convierte en una explicación clara que puedes guardar.
+        </p>
+      </div>
+
+      <!-- Carrusel de miniaturas (loop infinito) -->
+      <div class="fade-up" style="transition-delay: 0.1s;">
+        <div class="thumb-marquee" role="img" aria-label="Carrusel de portadas de contenido">
+          <div class="thumb-track">
+            <!-- Juego 1 -->
+            <img class="thumb-cell" src="assetslanding/Carrusel-1.png" alt="" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-2.png" alt="" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-3.png" alt="" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-4.png" alt="" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-5.png" alt="" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-6.png" alt="" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-7.png" alt="" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-8.png" alt="" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-9.png" alt="" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-10.png" alt="" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-11.png" alt="" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-12.png" alt="" loading="lazy">
+            <!-- Juego 2 (duplicado para el loop continuo) -->
+            <img class="thumb-cell" src="assetslanding/Carrusel-1.png" alt="" aria-hidden="true" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-2.png" alt="" aria-hidden="true" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-3.png" alt="" aria-hidden="true" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-4.png" alt="" aria-hidden="true" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-5.png" alt="" aria-hidden="true" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-6.png" alt="" aria-hidden="true" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-7.png" alt="" aria-hidden="true" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-8.png" alt="" aria-hidden="true" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-9.png" alt="" aria-hidden="true" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-10.png" alt="" aria-hidden="true" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-11.png" alt="" aria-hidden="true" loading="lazy">
+            <img class="thumb-cell" src="assetslanding/Carrusel-12.png" alt="" aria-hidden="true" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stack: cada escena se fija a pantalla completa y la siguiente se monta encima -->
+    <div class="stack">
+
+      <!-- Escena 1 — Blade Runner 2049 (Joi) -->
+      <div class="scene">
+        <div class="scene-inner">
+          <div class="scene-media">
+            <img class="scene-img" src="assetslanding/escena-bladerunner.png" alt="Escena de Blade Runner 2049">
+          </div>
+          <div class="scene-grad"></div>
+          <div class="scene-content">
+            <div class="scene-card">
+              <span class="ov-close">✕</span>
+              <div class="ov-q">IA Emocional</div>
+              <div class="ov-concept">Joi: ¿amor real o simulado?</div>
+              <div class="ov-text">Joi es una IA diseñada para amar, pero ¿su amor es real? Los modelos de lenguaje actuales generan respuestas emocionalmente coherentes sin experiencia interna verificable. El debate sobre si esto constituye 'sentir' está activo en laboratorios hoy.</div>
+              <div class="ov-tags">
+                <span class="ov-tag">LLMs</span>
+                <span class="ov-tag-t">Emociones artificiales</span>
+                <span class="ov-tag-t">Test de Turing</span>
+              </div>
+              <button class="ov-btn">Guardar →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scene-spacer" aria-hidden="true"></div>
+
+      <!-- Escena 2 — The Matrix -->
+      <div class="scene">
+        <div class="scene-inner">
+          <div class="scene-media">
+            <img class="scene-img" src="assetslanding/escena-matrix.png" alt="Escena de The Matrix">
+          </div>
+          <div class="scene-grad"></div>
+          <div class="scene-content">
+            <div class="scene-card">
+              <span class="ov-close">✕</span>
+              <div class="ov-q">Neurociencia</div>
+              <div class="ov-concept">Realidad construida por el cerebro</div>
+              <div class="ov-text">Tu cerebro no recibe el mundo, sino que recibe señales eléctricas y construye una representación. Experimentos de realidad virtual demuestran que el cerebro acepta entornos artificiales como reales en minutos. La Matrix no es tan ciencia ficción.</div>
+              <div class="ov-tags">
+                <span class="ov-tag">Neurociencia</span>
+                <span class="ov-tag-t">Percepción</span>
+                <span class="ov-tag-t">Realidad virtual</span>
+              </div>
+              <button class="ov-btn">Guardar →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scene-spacer" aria-hidden="true"></div>
+
+      <!-- Escena 3 — The Big Short -->
+      <div class="scene">
+        <div class="scene-inner">
+          <div class="scene-media">
+            <img class="scene-img" src="assetslanding/escena-thebigshort.png" alt="Escena de The Big Short">
+          </div>
+          <div class="scene-grad"></div>
+          <div class="scene-content">
+            <div class="scene-card">
+              <span class="ov-close">✕</span>
+              <div class="ov-q">Mercados financieros</div>
+              <div class="ov-concept">Hipotecas subprime</div>
+              <div class="ov-text">Una hipoteca subprime se otorga a prestatarios con historial crediticio riesgoso, a cambio de tasas de interés más altas. En 2008 millones de estas hipotecas fueron empaquetadas y vendidas como inversión segura. No lo eran.</div>
+              <div class="ov-tags">
+                <span class="ov-tag">Subprime</span>
+                <span class="ov-tag-t">Crédito</span>
+                <span class="ov-tag-t">2008</span>
+              </div>
+              <button class="ov-btn">Guardar →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scene-spacer" aria-hidden="true"></div>
+
+    </div>
+  </section>
+
+  <!-- ══════════ ¿QUÉ ES? — 3 PASOS ══════════ -->
+  <section id="la-experiencia" class="relative py-24 sm:py-32 px-5 sm:px-8 md:px-12 bg-[#0B0B0B]">
+    <div class="max-w-7xl mx-auto">
+      <div class="fade-up">
+        <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-6 leading-tight capitalize">
+          COOP convierte la curiosidad<br>en conocimiento.
+        </h2>
+        <p class="text-gray-400 text-sm md:text-base max-w-2xl leading-relaxed normal-case font-medium mb-16">
+          COOP es una capa de conocimiento integrada en plataformas de entretenimiento. Detecta preguntas en tiempo real y las transforma en experiencias de aprendizaje sin sacar al usuario del contenido.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
+        <!-- Paso 1 -->
+        <div class="relative fade-up" style="transition-delay: 0.1s;">
+          <div class="flex items-center gap-4 mb-4">
+            <span class="shrink-0 w-10 h-10 rounded-full border border-platzi-green/40 bg-platzi-green/10 text-platzi-green text-lg font-bold flex items-center justify-center">1</span>
+            <h3 class="text-lg sm:text-xl font-bold capitalize leading-tight">La Curiosidad Aparece</h3>
+          </div>
+          <p class="text-xs sm:text-sm leading-relaxed normal-case text-gray-400 md:pr-6">Estás viendo <span class="text-gray-200">Succession</span> o <span class="text-gray-200">House of Cards</span> y surge una pregunta. Un término financiero, un evento histórico o una referencia cultural despiertan tu interés.</p>
+          <div class="hidden md:block absolute top-5 -translate-y-1/2 -right-3 text-platzi-green/50 text-xl">→</div>
+        </div>
+
+        <!-- Paso 2 -->
+        <div class="relative fade-up" style="transition-delay: 0.2s;">
+          <div class="flex items-center gap-4 mb-4">
+            <span class="shrink-0 w-10 h-10 rounded-full border border-platzi-green/40 bg-platzi-green/10 text-platzi-green text-lg font-bold flex items-center justify-center">2</span>
+            <h3 class="text-lg sm:text-xl font-bold capitalize leading-tight">COOP Detecta El Momento</h3>
+          </div>
+          <p class="text-xs sm:text-sm leading-relaxed normal-case text-gray-400 md:pr-6">Pausas el contenido. COOP IA analiza la escena, los subtítulos y el contexto para entender exactamente qué quieres saber.</p>
+          <div class="hidden md:block absolute top-5 -translate-y-1/2 -right-3 text-platzi-green/50 text-xl">→</div>
+        </div>
+
+        <!-- Paso 3 -->
+        <div class="relative fade-up" style="transition-delay: 0.3s;">
+          <div class="flex items-center gap-4 mb-4">
+            <span class="shrink-0 w-10 h-10 rounded-full bg-platzi-green text-black text-lg font-bold flex items-center justify-center">3</span>
+            <h3 class="text-lg sm:text-xl font-bold capitalize leading-tight text-white">Aprendes Sin Salir Del Contenido</h3>
+          </div>
+          <p class="text-xs sm:text-sm leading-relaxed normal-case text-gray-300 md:pr-6">COOP despliega una explicación interactiva en segundos y te conecta con rutas de aprendizaje más profundas.</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-14 sm:mt-20 flex fade-up" style="transition-delay: 0.4s;">
+        <a href="#" data-demo-link
+           class="group inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 rounded-full bg-platzi-green hover:bg-platzi-greenLight text-black text-sm sm:text-base font-bold uppercase tracking-wide transition-all hover:scale-[1.03] shadow-[0_8px_32px_rgba(15,195,112,0.25)]">
+          Prueba el demo
+          <span class="transition-transform group-hover:translate-x-1">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ ¿HACIA DÓNDE VA COOP? — ROADMAP ══════════ -->
+  <section id="roadmap" class="relative py-24 sm:py-32 px-5 sm:px-8 md:px-12 bg-[#141414] border-y border-white/5 overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-platzi-green/[0.06] rounded-full blur-[160px] pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto">
+      <!-- Encabezado -->
+      <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16 fade-up">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter leading-tight mb-6">¿Hacia dónde va COOP?</h2>
+        <p class="text-gray-400 text-sm md:text-base leading-relaxed normal-case">
+          COOP empieza como plataforma de streaming con capa educativa. Pero esa es solo la puerta de entrada. El camino lleva hacia algo más grande: <span class="text-white font-medium">devolverle a cada persona el mapa de su propia atención.</span>
+        </p>
+      </div>
+
+      <!-- Tarjetas de roadmap -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+
+        <!-- 1 — Plataforma de streaming (tarjeta destacada) -->
+        <div class="flex flex-col rounded-2xl bg-gradient-to-b from-platzi-greenLight to-platzi-green p-7 shadow-[0_16px_48px_rgba(15,195,112,0.35)] hover:-translate-y-1 transition-all duration-300 fade-up" style="transition-delay: 0.1s;">
+          <img src="assetslanding/plataforrma.svg" alt="" class="w-10 h-10 mb-5" style="filter: brightness(0);">
+          <span class="inline-flex self-start items-center gap-1.5 text-[10px] font-bold tracking-widest uppercase text-black/70 mb-4">
+            <span class="w-1.5 h-1.5 rounded-full bg-black/60"></span> Prueba de concepto
+          </span>
+          <h3 class="text-lg font-bold leading-tight mb-3 text-[#0B0B0B]">COOP como plataforma de streaming</h3>
+          <p class="text-xs sm:text-sm text-black/75 leading-relaxed normal-case mb-6">La capa educativa sobre lo que ya ves. Pausa un contenido y aparece el contexto que lo convierte en aprendizaje.</p>
+          <a href="#" data-demo-link class="mt-auto inline-flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-[#0B0B0B] hover:bg-[#1c1c1c] text-white text-xs font-bold uppercase tracking-wide transition-colors">
+            Prueba el demo ↗
+          </a>
+        </div>
+
+        <!-- 2 — Extension -->
+        <div class="flex flex-col rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-transparent p-7 hover:border-platzi-green/40 hover:-translate-y-1 transition-all duration-300 fade-up" style="transition-delay: 0.2s;">
+          <img src="assetslanding/extension.svg" alt="" class="w-10 h-10 mb-5" style="filter: brightness(0) invert(1);">
+          <span class="inline-flex self-start items-center gap-1.5 text-[10px] font-bold tracking-widest uppercase text-[#3ECFB8] mb-4">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#3ECFB8]"></span> En construcción
+          </span>
+          <h3 class="text-lg font-bold leading-tight mb-3">COOP como extensión</h3>
+          <p class="text-xs sm:text-sm text-gray-400 leading-relaxed normal-case mb-6">La comunidad lo pidió: llevar la capa educativa a donde ya ves. Sin cambiar de app, sin salir de lo que amas.</p>
+          <p class="mt-auto text-xs font-medium text-gray-500 italic normal-case">Tu aprendizaje, donde ya estás.</p>
+        </div>
+
+        <!-- 3 — Addon -->
+        <div class="flex flex-col rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-transparent p-7 hover:border-platzi-green/40 hover:-translate-y-1 transition-all duration-300 fade-up" style="transition-delay: 0.3s;">
+          <img src="assetslanding/addon.svg" alt="" class="w-10 h-10 mb-5" style="filter: brightness(0) invert(1);">
+          <span class="inline-flex self-start items-center gap-1.5 text-[10px] font-bold tracking-widest uppercase text-gray-400 mb-4">
+            <span class="w-1.5 h-1.5 rounded-full bg-gray-500"></span> Próximamente
+          </span>
+          <h3 class="text-lg font-bold leading-tight mb-3">COOP como add-on</h3>
+          <p class="text-xs sm:text-sm text-gray-400 leading-relaxed normal-case mb-6">COOP se integra dentro de las plataformas de streaming existentes, como una capa nativa de aprendizaje.</p>
+          <p class="mt-auto text-xs font-medium text-gray-500 italic normal-case">De herramienta externa a parte del ecosistema.</p>
+        </div>
+
+        <!-- 4 — Protocolo Coop -->
+        <div class="flex flex-col rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-transparent p-7 hover:border-platzi-green/40 hover:-translate-y-1 transition-all duration-300 fade-up" style="transition-delay: 0.4s;">
+          <img src="assetslanding/prototcolo.svg" alt="" class="w-10 h-10 mb-5" style="filter: brightness(0) invert(1);">
+          <span class="inline-flex self-start items-center gap-1.5 text-[10px] font-bold tracking-widest uppercase text-gray-400 mb-4">
+            <span class="w-1.5 h-1.5 rounded-full bg-gray-500"></span> Visión
+          </span>
+          <h3 class="text-lg font-bold leading-tight mb-3">Protocolo COOP</h3>
+          <p class="text-xs sm:text-sm text-gray-400 leading-relaxed normal-case mb-6">Todo lo que pausas, repites y buscas dibuja un mapa de tu atención. El protocolo te lo devuelve: tuyo, privado, tu forma de aprender en tus manos.</p>
+          <p class="mt-auto text-xs font-medium text-gray-500 italic normal-case">Donde el usuario recupera su mente.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ CONTACTO ══════════ -->
+  <section id="contacto" style="position:relative;overflow:hidden;padding:6rem 2rem;text-align:center;border-top:1px solid var(--border2)">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(15,195,112,.06) 0%,transparent 70%);pointer-events:none"></div>
+    <div class="fade-up" style="max-width:640px;margin:0 auto;position:relative">
+      <h2 style="font-size:clamp(1.9rem,3.5vw,2.9rem);font-weight:700;letter-spacing:-.04em;line-height:1.15;margin-bottom:1rem">
+        ¿Quieres saber cómo avanza COOP?
+      </h2>
+      <p style="font-size:1rem;color:var(--muted);line-height:1.7;max-width:46ch;margin:0 auto 1.25rem">
+        ¿O el proyecto resuena contigo y construyes en EdTech?
+      </p>
+      <div style="font-size:clamp(1.9rem,3.5vw,2.9rem);font-weight:700;letter-spacing:-.04em;line-height:1.15;color:var(--green);margin-bottom:2.25rem">
+        Contáctame.
+      </div>
+      <a href="mailto:brayhamjaimes@gmail.com?subject=COOP%20%E2%80%94%20Hablemos&body=Hola%20Brayham%2C%20vi%20tu%20propuesta%20de%20COOP%20y%20me%20gustar%C3%ADa%20conversar." style="display:inline-flex;align-items:center;justify-content:center;background:var(--green);color:#0B0B0B;padding:14px 30px;border-radius:9999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:background .15s" onmouseover="this.style.background='#3FD68A'" onmouseout="this.style.background='var(--green)'">Contactar</a>
+
+      <div style="display:flex;justify-content:center;align-items:center;gap:.35rem;flex-wrap:wrap;margin-top:2.25rem;font-size:.82rem;color:var(--muted)">
+        <a href="https://brayhamjaimes.com/" target="_blank" rel="noopener" style="color:var(--text2);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text2)'">Portafolio</a>
+        <span style="color:var(--dim)">·</span>
+        <a href="https://www.linkedin.com/in/brayhamjaimes/" target="_blank" rel="noopener" style="color:var(--text2);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text2)'">LinkedIn</a>
+        <span style="color:var(--dim)">·</span>
+        <a href="https://x.com/brayhamjaimes" target="_blank" rel="noopener" style="color:var(--text2);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text2)'">X</a>
+        <span style="color:var(--dim)">·</span>
+        <a href="https://www.instagram.com/brayhamjaimes" target="_blank" rel="noopener" style="color:var(--text2);text-decoration:none;transition:color .15s" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='var(--text2)'">Instagram</a>
+      </div>
+
+      <p style="margin-top:1.75rem;font-size:.78rem;color:var(--dim);line-height:1.7">
+        Brayham Jaimes · UX-PM · brayhamjaimes@gmail.com
+      </p>
+    </div>
+  </section>
+
+  <footer class="bg-platzi-surface border-t border-white/5 px-5 sm:px-8 md:px-12 py-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] sm:text-[10px] text-gray-500 font-semibold tracking-widest uppercase fade-up">
+      <div class="flex items-center gap-2">
+        <div class="w-2 h-2 rounded-full bg-platzi-green"></div>
+        COOP © 2026
+      </div>
+      <div class="text-center md:text-right">Una idea de Brayham Jaimes · LATAM ·</div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      // 1. Animaciones de Fade Up al hacer scroll
+      const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+      // Forzar visibilidad inmediata en el Hero
+      setTimeout(() => {
+        document.querySelectorAll('#hero .fade-up, nav .fade-up').forEach(el => el.classList.add('visible'));
+      }, 100);
+
+      // 2. Escenas: apilado fijo (sticky) — entrada de la tarjeta + profundidad al cubrirse
+      const scenes = document.querySelectorAll('.scene');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (scenes.length) {
+        if (reduceMotion) {
+          scenes.forEach(s => s.classList.add('in-view'));
+        } else {
+          let ticking = false;
+          const updateScenes = () => {
+            const vh = window.innerHeight;
+            scenes.forEach((s, i) => {
+              const rect = s.getBoundingClientRect();
+              const inner = s.querySelector('.scene-inner');
+              const next = scenes[i + 1];
+              const nextTop = next ? next.getBoundingClientRect().top : Infinity;
+
+              // Profundidad: la escena se escala y atenúa a medida que la siguiente la cubre
+              if (inner) {
+                if (next) {
+                  const p = 1 - Math.max(0, Math.min(1, nextTop / vh)); // 0: sin cubrir → 1: cubierta
+                  inner.style.transform = `scale(${(1 - p * 0.06).toFixed(4)})`;
+                  inner.style.filter = `brightness(${(1 - p * 0.45).toFixed(3)})`;
+                } else {
+                  inner.style.transform = '';
+                  inner.style.filter = '';
+                }
+              }
+
+              // La tarjeta entra cuando la escena está fija al frente y la siguiente aún no la cubre
+              // (y se re-anima cada vez que la escena vuelve al frente)
+              const pinned = rect.top <= 2 && rect.bottom >= vh - 2;
+              const notYetCovered = nextTop > vh * 0.55;
+              s.classList.toggle('in-view', pinned && notYetCovered);
+            });
+            ticking = false;
+          };
+          const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(updateScenes); } };
+          window.addEventListener('scroll', onScroll, { passive: true });
+          window.addEventListener('resize', onScroll);
+          updateScenes();
+        }
+      }
+
+      // 3. Menú Móvil
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const closeMenuBtn = document.getElementById('closeMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileLinks = document.querySelectorAll('.mobile-link');
+
+      function toggleMenu() {
+        mobileMenu.classList.toggle('hidden');
+        mobileMenu.classList.toggle('flex');
+        document.body.style.overflow = mobileMenu.classList.contains('hidden') ? '' : 'hidden';
+      }
+
+      if(mobileMenuBtn && closeMenuBtn) {
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+      }
+
+    });
+  </script>
+  <script src="demo-config.js?v=2"></script>
+</body>
+</html>

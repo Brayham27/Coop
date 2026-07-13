@@ -11,7 +11,7 @@ export const items = [
     director: 'Christopher Nolan',
     description:
       'Un grupo de astronautas viaja a través de un agujero de gusano en busca de un nuevo hogar para la humanidad.',
-    thumbnail: '/thumbnails/interstellar.jpg',
+    thumbnail: 'thumbnails/interstellar.jpg',
     rotate180: true,
     videoUrl: VIDEO_URL,
     whatYouLearn:
@@ -169,7 +169,7 @@ export const items = [
     director: 'Denis Villeneuve',
     description:
       'Un blade runner descubre un secreto que podría hundir lo que queda de la sociedad.',
-    thumbnail: '/thumbnails/blade-runner-2049.jpg',
+    thumbnail: 'thumbnails/blade-runner-2049.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781846901/bladerun_ab2fjl.mp4',
@@ -328,7 +328,7 @@ export const items = [
     director: 'Denis Villeneuve',
     description:
       'Una lingüista es reclutada para comunicarse con extraterrestres que han aterrizado en la Tierra.',
-    thumbnail: '/thumbnails/arrival.jpg',
+    thumbnail: 'thumbnails/arrival.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781847207/arrival_lyyi0e.mp4',
@@ -487,7 +487,7 @@ export const items = [
     director: 'Las Wachowski',
     description:
       'Un hacker descubre que la realidad es una simulación controlada por máquinas.',
-    thumbnail: '/thumbnails/the-matrix.jpg',
+    thumbnail: 'thumbnails/the-matrix.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781847526/matrix_j8aaeh.mp4',
@@ -646,7 +646,7 @@ export const items = [
     director: 'Alex Garland',
     description:
       'Un programador es seleccionado para evaluar las capacidades de una IA con forma humana.',
-    thumbnail: '/thumbnails/ex-machina.jpg',
+    thumbnail: 'thumbnails/ex-machina.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781847723/exmachina_ffl0qn.mp4',
@@ -805,7 +805,7 @@ export const items = [
     director: 'Denis Villeneuve',
     description:
       'El hijo de una noble familia es enviado al planeta más peligroso del universo.',
-    thumbnail: '/thumbnails/dune.jpg',
+    thumbnail: 'thumbnails/dune.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781847944/dune_jb1r5r.mp4',
@@ -964,7 +964,7 @@ export const items = [
     director: 'Adam McKay',
     description:
       'Un grupo de inversionistas detecta la burbuja inmobiliaria de 2008 antes que el resto del mercado y apuesta en su contra.',
-    thumbnail: '/thumbnails/the-big-short.jpg',
+    thumbnail: 'thumbnails/the-big-short.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781850977/bigshort_kclnl3.mp4',
@@ -1123,7 +1123,7 @@ export const items = [
     director: 'J.C. Chandor',
     description:
       'Durante 24 horas críticas, los ejecutivos de un banco de inversión descubren que están a punto de colapsar y deben decidir qué hacer con esa información.',
-    thumbnail: '/thumbnails/margin-call.jpg',
+    thumbnail: 'thumbnails/margin-call.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781848509/margincall_yp8fo8.mp4',
@@ -1282,7 +1282,7 @@ export const items = [
     director: 'Oliver Stone',
     description:
       'Un joven corredor de bolsa ambicioso cae bajo la influencia de un inversionista despiadado que opera al límite de la ley.',
-    thumbnail: '/thumbnails/wall-street.jpg',
+    thumbnail: 'thumbnails/wall-street.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781848742/wallstreet_oiqx0j.mp4',
@@ -1441,7 +1441,7 @@ export const items = [
     director: 'Ben Younger',
     description:
       'Un joven es reclutado por una firma de corretaje que vende acciones fraudulentas a través de tácticas de venta agresivas.',
-    thumbnail: '/thumbnails/boiler-room.jpg',
+    thumbnail: 'thumbnails/boiler-room.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781848954/boiler_room_wzo0lh.mp4',
@@ -1600,7 +1600,7 @@ export const items = [
     director: 'Bennett Miller',
     description:
       'El gerente general de un equipo de béisbol con presupuesto limitado usa análisis estadístico para construir un equipo competitivo desafiando la sabiduría tradicional del deporte.',
-    thumbnail: '/thumbnails/moneyball.jpg',
+    thumbnail: 'thumbnails/moneyball.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781849194/moneyball_v17cif.mp4',
@@ -1759,7 +1759,7 @@ export const items = [
     director: 'Martin Scorsese',
     description:
       'La ascensión y caída de un corredor de bolsa que construyó un imperio financiero sobre fraude bursátil y excesos desenfrenados.',
-    thumbnail: '/thumbnails/wolf-of-wall-street.jpg',
+    thumbnail: 'thumbnails/wolf-of-wall-street.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781849402/wolf_of_wallstreet_ybepjv.mp4',
@@ -1918,7 +1918,7 @@ export const items = [
     director: 'Gary Hustwit',
     description:
       'Un recorrido por la historia y omnipresencia de la tipografía Helvetica, y cómo transformó el diseño gráfico mundial.',
-    thumbnail: '/thumbnails/helvetica.jpg',
+    thumbnail: 'thumbnails/helvetica.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781849593/helvetica_i9s6wk.mp4',
@@ -2077,7 +2077,7 @@ export const items = [
     director: 'Gary Hustwit',
     description:
       'Una exploración de la relación entre humanos y objetos diseñados, a través de entrevistas con los diseñadores industriales más influyentes del mundo.',
-    thumbnail: '/thumbnails/objectified.jpg',
+    thumbnail: 'thumbnails/objectified.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781849797/objectified_artrgy.mp4',
@@ -2236,7 +2236,7 @@ export const items = [
     director: 'Morgan Neville (showrunner)',
     description:
       'Una serie documental que explora las mentes de diseñadores excepcionales en disciplinas que van desde arquitectura hasta ilustración y diseño de zapatillas.',
-    thumbnail: '/thumbnails/abstract.jpg',
+    thumbnail: 'thumbnails/abstract.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781850099/abstract_aevoha.mp4',
@@ -2395,7 +2395,7 @@ export const items = [
     director: 'Gary Hustwit',
     description:
       'Un retrato íntimo de Dieter Rams, el diseñador industrial cuyos diez principios de buen diseño influenciaron generaciones de productos, incluyendo a Apple.',
-    thumbnail: '/thumbnails/rams.jpg',
+    thumbnail: 'thumbnails/rams.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781850266/Rams_-_Official_Trailer_-_Film_First_720p_h264_rusubb.mp4',
@@ -2554,7 +2554,7 @@ export const items = [
     director: 'David Dworsky, Victor Köhler',
     description:
       'Una exploración de cómo la tecnología digital democratizó la creación artística, y las nuevas preguntas que esa democratización generó sobre calidad y curación.',
-    thumbnail: '/thumbnails/presspauseplay.jpg',
+    thumbnail: 'thumbnails/presspauseplay.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781850524/PressPausePlay_Official_Trailer_-_PressPausePlay_720p_h264_uzitjw.mp4',
@@ -2713,7 +2713,7 @@ export const items = [
     director: 'Doug Pray',
     description:
       'Un vistazo a las mentes creativas detrás de las campañas publicitarias más memorables de la historia, y cómo la gran idea sigue importando más que el medio.',
-    thumbnail: '/thumbnails/art-and-copy.jpg',
+    thumbnail: 'thumbnails/art-and-copy.jpg',
     rotate180: true,
     videoUrl:
       'https://res.cloudinary.com/dydtxbjkd/video/upload/v1781850761/art_adn_copy_q7c0zb.mp4',

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import SplashScreen from './components/SplashScreen.jsx'
 import Navbar from './components/Navbar.jsx'
 import HeroCard from './components/HeroCard.jsx'
@@ -32,13 +32,13 @@ function Detail() {
 
 export default function App() {
   return (
-    <BrowserRouter basename="/demo">
+    <HashRouter>
       <SplashScreen />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/player/:id" element={<VideoPlayer />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }

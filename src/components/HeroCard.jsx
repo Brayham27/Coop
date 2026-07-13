@@ -6,7 +6,7 @@ export default function HeroCard({ item }) {
   return (
     <section
       className="hero"
-      style={{ backgroundImage: "url('/thumbnails/hero-main.jpg')" }}
+      style={{ backgroundImage: "url('thumbnails/hero-main.jpg')" }}
     >
       <div className="hero-content">
         <div className="hero-badges">

@@ -16,7 +16,7 @@ export default function SplashScreen() {
 
   return (
     <div className={`splash${hide ? ' splash--hide' : ''}`} aria-hidden="true">
-      <img src="/logo.svg" alt="" className="splash-logo" />
+      <img src="logo.svg" alt="" className="splash-logo" />
     </div>
   )
 }

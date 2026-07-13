@@ -34,11 +34,45 @@ export default function VideoPlayer() {
   const [activeNote, setActiveNote] = useState(null)
   const [activeTab, setActiveTab] = useState(learningTabs[0]?.id ?? null)
   const [lastSeen, setLastSeen] = useState({})
+  const [noteSaved, setNoteSaved] = useState(false)
+  const saveTimerRef = useRef(null)
+  const suppressNoteRef = useRef(false)
+
+  // Guardar la nota: anima el botón a "Guardado", oculta la tarjeta y reanuda
+  // la reproducción — sin navegar ni sacar del reproductor.
+  const handleSaveNote = (e) => {
+    e.stopPropagation()
+    if (noteSaved) return
+    setNoteSaved(true)
+    clearTimeout(saveTimerRef.current)
+    saveTimerRef.current = setTimeout(() => {
+      // Evita que un posible evento 'pause' vuelva a mostrar la nota al reanudar
+      suppressNoteRef.current = true
+      setActiveNote(null)
+      setNoteSaved(false)
+      const p = videoRef.current?.play()
+      if (p && p.catch) p.catch(() => {})
+      setTimeout(() => { suppressNoteRef.current = false }, 500)
+    }, 750)
+  }
+
+  useEffect(() => () => clearTimeout(saveTimerRef.current), [])
 
   const showControls = useCallback(() => {
     setControlsVisible(true)
     clearTimeout(hideTimerRef.current)
-    hideTimerRef.current = setTimeout(() => setControlsVisible(false), 3000)
+    // Solo se auto-ocultan si el video está reproduciéndose (en pausa quedan visibles)
+    hideTimerRef.current = setTimeout(() => {
+      if (videoRef.current && !videoRef.current.paused) setControlsVisible(false)
+    }, 2500)
+  }, [])
+
+  // Al salir el cursor del video, ocultar los controles (solo si está reproduciéndose)
+  const hideControls = useCallback(() => {
+    if (videoRef.current && !videoRef.current.paused) {
+      clearTimeout(hideTimerRef.current)
+      setControlsVisible(false)
+    }
   }, [])
 
   useEffect(() => {
@@ -156,6 +190,7 @@ export default function VideoPlayer() {
       ref={playerRef}
       className={`player${controlsVisible ? '' : ' hide-cursor'}`}
       onMouseMove={showControls}
+      onMouseLeave={hideControls}
     >
       <div className={`player-top${hiddenClass}`}>
         <button className="player-close" onClick={() => navigate('/')} aria-label="Volver al inicio">
@@ -181,9 +216,14 @@ export default function VideoPlayer() {
             onPlay={() => {
               setIsPlaying(true)
               setActiveNote(null)
+              showControls()
             }}
             onPause={() => {
               setIsPlaying(false)
+              // En pausa: mostrar los controles y mantenerlos (sin auto-ocultar)
+              clearTimeout(hideTimerRef.current)
+              setControlsVisible(true)
+              if (suppressNoteRef.current) return
               resolveNote(activeTab, videoRef.current?.currentTime ?? 0)
             }}
             onSeeked={(e) => {
@@ -214,10 +254,11 @@ export default function VideoPlayer() {
                 ))}
               </div>
               <button
-                className="note-cta"
-                onClick={() => window.open(activeNote.platziUrl || '#', '_blank')}
+                className={`note-cta${noteSaved ? ' is-saved' : ''}`}
+                onClick={handleSaveNote}
+                disabled={noteSaved}
               >
-                Guardar en Platzi →
+                {noteSaved ? '✓ Guardado' : 'Guardar →'}
               </button>
             </div>
           )}
@@ -225,6 +266,21 @@ export default function VideoPlayer() {
       </div>
 
       <div className={`player-controls${hiddenClass}`}>
+        {learningTabs.length > 1 && (
+          <div className="player-chips">
+            {learningTabs.map((tab) => (
+              <button
+                key={tab.id}
+                className={`player-chip${tab.id === activeTab ? ' active' : ''}`}
+                onClick={() => handleTabChange(tab.id)}
+                title={lastSeen[tab.id] || 'Sin explorar'}
+              >
+                {lastSeen[tab.id] && <span className="player-chip-dot" aria-hidden="true" />}
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        )}
         <div
           ref={progressRef}
           className="progress-track"
@@ -276,63 +332,6 @@ export default function VideoPlayer() {
         </div>
       </div>
 
-      {learningTabs.length > 1 && (
-        <div
-          style={{
-            display: 'flex',
-            gap: 'var(--space-3)',
-            justifyContent: 'space-between',
-            maxWidth: '960px',
-            width: '100%',
-            margin: '0 auto',
-            padding: '0 var(--space-8) var(--space-8)',
-          }}
-        >
-          {learningTabs.map((tab) => {
-            const isActive = tab.id === activeTab
-            return (
-              <button
-                key={tab.id}
-                onClick={() => handleTabChange(tab.id)}
-                style={{
-                  flex: 1,
-                  minWidth: 0,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: 'var(--space-1)',
-                  padding: 'var(--space-4)',
-                  borderRadius: 'var(--radius-lg)',
-                  background: isActive ? 'var(--platzi-green-bg)' : 'var(--platzi-surface)',
-                  border: isActive
-                    ? '1px solid rgba(15,195,112,0.3)'
-                    : '1px solid var(--platzi-border)',
-                  color: 'var(--text-primary)',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                  textAlign: 'center',
-                }}
-              >
-                <span style={{ fontSize: '1.5rem', lineHeight: 1 }}>{tab.icon}</span>
-                <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{tab.label}</span>
-                <span
-                  style={{
-                    display: 'block',
-                    width: '100%',
-                    fontSize: '0.7rem',
-                    color: 'var(--text-muted)',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  {lastSeen[tab.id] || 'Sin explorar'}
-                </span>
-              </button>
-            )
-          })}
-        </div>
-      )}
     </div>
   )
 }
