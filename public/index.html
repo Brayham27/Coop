@@ -234,6 +234,32 @@
     .ov-btn { width: 100%; background: var(--green); color: var(--bg); border: none; border-radius: 10px; padding: 8px 16px; font-size: .75rem; font-weight: 600; cursor: pointer; font-family: var(--font); transition: background .15s, transform .2s cubic-bezier(.34,1.56,.64,1); }
     .ov-btn:hover { background: #3FD68A; }
 
+    /* Nombre de la película (abajo-izquierda) + hint de scroll (abajo-centro) */
+    .scene-name {
+      position: absolute; z-index: 3; left: 3rem; bottom: 2.5rem;
+      display: inline-flex; align-items: center; gap: .65rem;
+      font-family: var(--font); font-size: .95rem; font-weight: 700; letter-spacing: .005em;
+      color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,.7);
+    }
+    .scene-name::before {
+      content: ""; width: 26px; height: 2px; border-radius: 2px;
+      background: var(--green); box-shadow: 0 0 12px rgba(15,195,112,.6);
+    }
+    .scene-scroll {
+      position: absolute; z-index: 3; left: 50%; bottom: 2rem; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 5px; pointer-events: none;
+      font-family: var(--font); font-size: .6rem; font-weight: 700;
+      letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.6);
+    }
+    .scene-scroll .arw {
+      font-size: 1rem; line-height: 1; color: var(--green);
+      animation: scroll-hint 1.6s ease-in-out infinite;
+    }
+    @keyframes scroll-hint {
+      0%, 100% { transform: translateY(0); opacity: .55; }
+      50%      { transform: translateY(6px); opacity: 1; }
+    }
+
     @media (max-width: 760px) {
       .scene-content {
         align-items: flex-end; justify-content: center;
@@ -241,11 +267,14 @@
       }
       .scene-card { width: 100%; }
       .scene-tag { left: 1.25rem; bottom: 1.25rem; }
+      .scene-name { left: 1.25rem; bottom: auto; top: 4.75rem; font-size: .85rem; }
+      .scene-scroll { display: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .fade-up, .scene-card { transition: none; }
       .scene-inner { transform: none !important; filter: none !important; }
+      .scene-scroll .arw { animation: none; }
     }
   </style>
 </head>
@@ -379,6 +408,8 @@
             <img class="scene-img" src="assetslanding/escena-bladerunner.png" alt="Escena de Blade Runner 2049">
           </div>
           <div class="scene-grad"></div>
+          <div class="scene-name">Blade Runner 2049</div>
+          <div class="scene-scroll" aria-hidden="true">Scroll<span class="arw">↓</span></div>
           <div class="scene-content">
             <div class="scene-card">
               <span class="ov-close">✕</span>
@@ -404,6 +435,8 @@
             <img class="scene-img" src="assetslanding/escena-matrix.png" alt="Escena de The Matrix">
           </div>
           <div class="scene-grad"></div>
+          <div class="scene-name">The Matrix</div>
+          <div class="scene-scroll" aria-hidden="true">Scroll<span class="arw">↓</span></div>
           <div class="scene-content">
             <div class="scene-card">
               <span class="ov-close">✕</span>
@@ -429,6 +462,8 @@
             <img class="scene-img" src="assetslanding/escena-thebigshort.png" alt="Escena de The Big Short">
           </div>
           <div class="scene-grad"></div>
+          <div class="scene-name">The Big Short</div>
+          <div class="scene-scroll" aria-hidden="true">Scroll<span class="arw">↓</span></div>
           <div class="scene-content">
             <div class="scene-card">
               <span class="ov-close">✕</span>
@@ -505,7 +540,7 @@
   </section>
 
   <!-- ══════════ ¿HACIA DÓNDE VA COOP? — ROADMAP ══════════ -->
-  <section id="roadmap" class="relative py-24 sm:py-32 px-5 sm:px-8 md:px-12 bg-[#141414] border-y border-white/5 overflow-hidden">
+  <section id="roadmap" class="relative py-24 sm:py-32 px-5 sm:px-8 md:px-12 bg-[#0B0B0B] border-y border-white/5 overflow-hidden">
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-platzi-green/[0.06] rounded-full blur-[160px] pointer-events-none"></div>
 
     <div class="relative max-w-7xl mx-auto">
