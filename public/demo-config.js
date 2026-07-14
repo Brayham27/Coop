@@ -10,7 +10,10 @@ window.COOP_DEMO_URL = 'demo.html';
 (function () {
   document.querySelectorAll('[data-demo-link]').forEach(function (a) {
     a.href = window.COOP_DEMO_URL;
-    a.target = '_blank';
-    a.rel = 'noopener';
+    // Navegación en la misma pestaña: el demo sustituye a la landing (y el
+    // botón "Volver a la landing" del demo hace el camino inverso), en vez
+    // de ir abriendo pestañas nuevas en cada salto.
+    a.removeAttribute('target');
+    a.removeAttribute('rel');
   });
 })();
